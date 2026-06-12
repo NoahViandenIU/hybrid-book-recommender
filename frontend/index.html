@@ -16,20 +16,54 @@
   <p>Enter a pseudonymous user ID such as U001, U003 or U014.</p>
   <input id="user" value="U003" aria-label="User ID">
   <button onclick="loadRecommendations()">Get recommendations</button>
+  <p id="status" role="status" aria-live="polite"></p>
   <main id="results"></main>
   <script>
     async function loadRecommendations() {
       const user = document.getElementById('user').value.trim();
-      const response = await fetch(`/api/recommendations/${user}?k=5`);
-      const data = await response.json();
+      const status = document.getElementById('status');
       const results = document.getElementById('results');
-      results.innerHTML = `<h2>Recommendations for ${data.user_id}</h2>`;
-      data.recommendations.forEach(book => {
-        const el = document.createElement('section');
-        el.className = 'book';
-        el.innerHTML = `<h3>${book.title}</h3><p>${book.author} - ${book.genre}</p><p>${book.description}</p><p class="score">Hybrid score: ${book.score}</p>`;
-        results.appendChild(el);
-      });
+      results.replaceChildren();
+      status.textContent = '';
+
+      if (!user) {
+        status.textContent = 'Enter a user ID.';
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `/api/recommendations/${encodeURIComponent(user)}?k=5`
+        );
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Recommendation request failed.');
+        }
+
+        const heading = document.createElement('h2');
+        heading.textContent = `Recommendations for ${data.user_id}`;
+        results.appendChild(heading);
+
+        data.recommendations.forEach(book => {
+          const section = document.createElement('section');
+          section.className = 'book';
+
+          const title = document.createElement('h3');
+          title.textContent = book.title;
+          const metadata = document.createElement('p');
+          metadata.textContent = `${book.author} - ${book.genre}`;
+          const description = document.createElement('p');
+          description.textContent = book.description;
+          const score = document.createElement('p');
+          score.className = 'score';
+          score.textContent = `Hybrid score: ${book.score}`;
+
+          section.append(title, metadata, description, score);
+          results.appendChild(section);
+        });
+      } catch (error) {
+        status.textContent = error.message;
+      }
     }
     loadRecommendations();
   </script>

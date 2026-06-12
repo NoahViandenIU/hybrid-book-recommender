@@ -1,10 +1,177 @@
 {
-  "users_evaluated": 15,
-  "precision_at_5": 0.17333333333333334,
-  "recall_at_5": 0.8666666666666667,
-  "f1_at_5": 0.2888888888888889,
-  "hit_rate_at_5": 0.8666666666666667,
-  "mean_latency_ms": 0.45424093333963356,
-  "median_latency_ms": 0.4500420000113081,
-  "alpha": 0.6
+  "protocol": {
+    "k": 5,
+    "users_evaluated": 15,
+    "validation_holdout": "second alphabetically last positive item per user",
+    "test_holdout": "alphabetically last positive item per user",
+    "alpha_grid": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "selection_rule": "highest validation hit_rate_at_5, then validation mrr_at_5"
+  },
+  "selected_alpha": 0.7,
+  "validation_results": {
+    "0.0": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.08,
+      "recall_at_5": 0.4,
+      "f1_at_5": 0.13333333333333336,
+      "hit_rate_at_5": 0.4,
+      "mrr_at_5": 0.14666666666666667,
+      "mean_latency_ms": 0.3810666666140605,
+      "median_latency_ms": 0.3652999998848827
+    },
+    "0.1": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.09333333333333334,
+      "recall_at_5": 0.4666666666666667,
+      "f1_at_5": 0.15555555555555559,
+      "hit_rate_at_5": 0.4666666666666667,
+      "mrr_at_5": 0.20222222222222222,
+      "mean_latency_ms": 0.38967333336283144,
+      "median_latency_ms": 0.36959999988539494
+    },
+    "0.2": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.09333333333333334,
+      "recall_at_5": 0.4666666666666667,
+      "f1_at_5": 0.15555555555555559,
+      "hit_rate_at_5": 0.4666666666666667,
+      "mrr_at_5": 0.23555555555555555,
+      "mean_latency_ms": 0.37945333339545567,
+      "median_latency_ms": 0.36339999996926053
+    },
+    "0.3": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.09333333333333334,
+      "recall_at_5": 0.4666666666666667,
+      "f1_at_5": 0.15555555555555559,
+      "hit_rate_at_5": 0.4666666666666667,
+      "mrr_at_5": 0.2411111111111111,
+      "mean_latency_ms": 0.3789333334376958,
+      "median_latency_ms": 0.3644999997050036
+    },
+    "0.4": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.14666666666666667,
+      "recall_at_5": 0.7333333333333333,
+      "f1_at_5": 0.24444444444444446,
+      "hit_rate_at_5": 0.7333333333333333,
+      "mrr_at_5": 0.32666666666666666,
+      "mean_latency_ms": 0.3805600000002111,
+      "median_latency_ms": 0.36969999973734957
+    },
+    "0.5": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.13333333333333333,
+      "recall_at_5": 0.6666666666666666,
+      "f1_at_5": 0.22222222222222224,
+      "hit_rate_at_5": 0.6666666666666666,
+      "mrr_at_5": 0.39666666666666667,
+      "mean_latency_ms": 0.3873266666535831,
+      "median_latency_ms": 0.3703999996105267
+    },
+    "0.6": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.13333333333333333,
+      "recall_at_5": 0.6666666666666666,
+      "f1_at_5": 0.22222222222222224,
+      "hit_rate_at_5": 0.6666666666666666,
+      "mrr_at_5": 0.4222222222222222,
+      "mean_latency_ms": 0.3829266666798503,
+      "median_latency_ms": 0.36150000005363836
+    },
+    "0.7": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.14666666666666667,
+      "recall_at_5": 0.7333333333333333,
+      "f1_at_5": 0.24444444444444446,
+      "hit_rate_at_5": 0.7333333333333333,
+      "mrr_at_5": 0.4633333333333333,
+      "mean_latency_ms": 0.3686600000643618,
+      "median_latency_ms": 0.3645000001597509
+    },
+    "0.8": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.14666666666666667,
+      "recall_at_5": 0.7333333333333333,
+      "f1_at_5": 0.24444444444444446,
+      "hit_rate_at_5": 0.7333333333333333,
+      "mrr_at_5": 0.45,
+      "mean_latency_ms": 0.3700799999933224,
+      "median_latency_ms": 0.35519999983080197
+    },
+    "0.9": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.14666666666666667,
+      "recall_at_5": 0.7333333333333333,
+      "f1_at_5": 0.24444444444444446,
+      "hit_rate_at_5": 0.7333333333333333,
+      "mrr_at_5": 0.4166666666666667,
+      "mean_latency_ms": 0.5947666666543228,
+      "median_latency_ms": 0.49760000001697335
+    },
+    "1.0": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.14666666666666667,
+      "recall_at_5": 0.7333333333333333,
+      "f1_at_5": 0.24444444444444446,
+      "hit_rate_at_5": 0.7333333333333333,
+      "mrr_at_5": 0.37222222222222223,
+      "mean_latency_ms": 0.4882800000511149,
+      "median_latency_ms": 0.4506000000219501
+    }
+  },
+  "test_results": {
+    "collaborative-only": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.09333333333333334,
+      "recall_at_5": 0.4666666666666667,
+      "f1_at_5": 0.15555555555555559,
+      "hit_rate_at_5": 0.4666666666666667,
+      "mrr_at_5": 0.3055555555555556,
+      "mean_latency_ms": 0.46382666669160244,
+      "median_latency_ms": 0.46320000001287553
+    },
+    "hybrid-alpha-0.7": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.18666666666666668,
+      "recall_at_5": 0.9333333333333333,
+      "f1_at_5": 0.31111111111111117,
+      "hit_rate_at_5": 0.9333333333333333,
+      "mrr_at_5": 0.7855555555555556,
+      "mean_latency_ms": 0.4760933333576152,
+      "median_latency_ms": 0.46269999984360766
+    },
+    "content-only": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.18666666666666668,
+      "recall_at_5": 0.9333333333333333,
+      "f1_at_5": 0.31111111111111117,
+      "hit_rate_at_5": 0.9333333333333333,
+      "mrr_at_5": 0.8666666666666667,
+      "mean_latency_ms": 0.559273333328747,
+      "median_latency_ms": 0.476899999739544
+    },
+    "popularity-only": {
+      "users_evaluated": 15,
+      "precision_at_5": 0.09333333333333334,
+      "recall_at_5": 0.4666666666666667,
+      "f1_at_5": 0.15555555555555559,
+      "hit_rate_at_5": 0.4666666666666667,
+      "mrr_at_5": 0.19333333333333333,
+      "mean_latency_ms": 0.007820000034068167,
+      "median_latency_ms": 0.0068999997893115506
+    }
+  }
 }

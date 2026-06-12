@@ -157,10 +157,12 @@ class HybridRecommender:
         return self.alpha * content + (1 - self.alpha) * collaborative
 
     def recommend(self, user_id: str, k: int = 5) -> List[Tuple[str, float]]:
+        if not isinstance(k, int) or isinstance(k, bool) or k < 1:
+            raise ValueError("k must be a positive integer")
         seen = set(self.ratings.get(user_id, {}))
         candidates = [bid for bid in self.books if bid not in seen]
         ranked = [(bid, self.score(user_id, bid)) for bid in candidates]
-        ranked.sort(key=lambda x: x[1], reverse=True)
+        ranked.sort(key=lambda x: (-x[1], x[0]))
         return ranked[:k]
 
 

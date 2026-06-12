@@ -11,6 +11,10 @@ filtering. It stores only pseudonymous user identifiers and synthetic ratings.
 The implementation is intentionally compact so that it can be inspected,
 tested, and reproduced easily.
 
+The hybrid weight is selected on a validation holdout and then evaluated on a
+separate test holdout. The evaluation also reports content-only,
+collaborative-only, and popularity-only baselines.
+
 ## Repository Structure
 
 ```text
@@ -71,6 +75,9 @@ Windows:
 py -m unittest discover -s tests
 ```
 
+The suite covers the recommendation engine, deterministic ranking, validation,
+API responses, invalid input handling, and the evaluation protocol.
+
 ## Reproduce Evaluation
 
 ```bash
@@ -85,6 +92,20 @@ py scripts\evaluate.py
 
 The script writes `reports/evaluation_summary.json` and
 `reports/evaluation_rows.csv`.
+
+The current reproducible evaluation selects `alpha = 0.7` on the validation
+split. On the separate test split, both the hybrid and content-only models
+recover 14 of 15 held-out positive items in the top five. Content-only has the
+higher MRR@5, so the results support the hybrid implementation but do not claim
+that it outperforms every simpler baseline.
+
+## API
+
+- `GET /api/books`
+- `GET /api/recommendations/<user_id>?k=5`
+
+The API accepts between 1 and 20 recommendations and returns JSON errors with
+HTTP status 400 for invalid parameters.
 
 ## Privacy Note
 
