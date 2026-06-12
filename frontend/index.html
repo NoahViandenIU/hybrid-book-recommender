@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Recommendation Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.4; }
+    input, button { padding: .5rem; margin-right: .5rem; }
+    .book { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: .8rem 0; }
+    .score { font-size: .9rem; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Hybrid Book Recommendations</h1>
+  <p>Enter a pseudonymous user ID such as U001, U003 or U014.</p>
+  <input id="user" value="U003" aria-label="User ID">
+  <button onclick="loadRecommendations()">Get recommendations</button>
+  <main id="results"></main>
+  <script>
+    async function loadRecommendations() {
+      const user = document.getElementById('user').value.trim();
+      const response = await fetch(`/api/recommendations/${user}?k=5`);
+      const data = await response.json();
+      const results = document.getElementById('results');
+      results.innerHTML = `<h2>Recommendations for ${data.user_id}</h2>`;
+      data.recommendations.forEach(book => {
+        const el = document.createElement('section');
+        el.className = 'book';
+        el.innerHTML = `<h3>${book.title}</h3><p>${book.author} - ${book.genre}</p><p>${book.description}</p><p class="score">Hybrid score: ${book.score}</p>`;
+        results.appendChild(el);
+      });
+    }
+    loadRecommendations();
+  </script>
+</body>
+</html>
